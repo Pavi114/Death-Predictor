@@ -104,6 +104,7 @@ table , td{
 		justify-content: center;
 	}
 
+
 	.inputGroup{
 
 		display: flex;
@@ -117,9 +118,6 @@ table , td{
 
 	#printResult{
 		margin: 0 auto;
-		top: 50px;
-		bottom: 100px;
-		position: absolute;
 		background-color: #A9A9A9;
 		border-radius: 8px;
 		padding: 1em;
@@ -131,8 +129,11 @@ table , td{
 		font-family: "Georgia",serif;
 		font-style: italic;
 		font-size: 2vw;
-	}
+	 }
 
+	 #userDetails .show {
+	 	display: block;
+	 }
 	
 	.res li {
 		margin: 0.5em;
