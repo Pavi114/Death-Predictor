@@ -1,0 +1,134 @@
+html {
+	height: 100%;
+}
+body {
+	font-family: "Lucida Console", Monospace;
+	background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSyDXFqkhWl9RtW99D7sKkEQ-4A7R2EnL50it2AOfL_4479DgJ");
+	background-position: center;
+	background-size: cover;
+	font-size: 1.3vw;
+}
+
+hr {
+	width: 60%;
+	color: #000000;
+	box-shadow: 2px 2px 1px #FBE7C6;
+  }
+
+h1 {
+	font-family: "Verdana",sans-serif;
+	text-shadow: 0 0 3px #FF0000;
+	text-align: center;
+	margin-top: 50px;
+	margin-bottom: 20px;
+}
+
+h2 , h3 {
+	text-align: center;
+	font-family: "Georgia",serif;
+	text-shadow: 0 0 3px #FF0000;
+}
+
+
+	button {
+		margin: 8px;
+		background-color:	#FF69B4;
+		border-radius: 8px;
+		box-shadow: 5px 5px 3px #FBE7C6;
+		padding: 1em;
+	}
+
+	table {
+		width: 100%;
+		border-collapse: collapse;
+		background-color: #fcc1b6	;
+		border: 1px solid black;
+		font-family:"Verdana",sans-serif; 
+		margin-top: 0.6em;
+
+	}
+
+    tr {
+    	 width: 100%;
+     }
+
+	table , td{
+		border: 1px solid black;
+
+	}
+
+	.hidden{
+		display: none; 
+	}
+
+.row{
+	display: flex;
+	justify-content: center;
+}
+
+.column {
+	display: flex;
+	flex-direction: column;
+	padding: 1em;
+}
+.res {
+	display: flex;
+	flex-direction: column;
+	margin: 0 2.5em;
+  	font-family: "Georgia",serif;
+  	font-style: italic;
+  	font-size: 2vw;
+}
+
+.res2 {
+	display: flex;
+	flex-direction: column;
+	font-family: "Georgia",serif;
+	margin: 0.5em 1.5em;
+
+}
+
+.inputGroup {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.input-group label {
+	margin-right: 1em; 
+	padding: .5em 0;
+}
+
+#userDetails input, #userDetails select {
+	flex: 6;
+	padding: .5em;
+	margin-bottom: 1.5em;
+}
+
+.gen-style {
+	display: flex;
+	flex-direction: column;
+}
+
+#userDetails {
+	background-color: #fcc1b6;
+	border-radius: 8px;
+	padding: 1em;
+	margin:0 10em 4em 10em;
+}
+
+
+  #printResult {
+  
+  	background-color: #A9A9A9;
+  	border-radius: 8px;
+	padding: 1em;
+	margin:0 10em 4em 10em;
+  }
+
+ 
+/*@media screen and (max-width: 600px) {
+  label,input{
+   width: 100%;
+    margin-top: 0;
+  }
+}*/

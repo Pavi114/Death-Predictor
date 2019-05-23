@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Calorie Tracker</title>
+	<link rel="stylesheet" type="text/css" href="task1.css">
+</head>
+<body>
+
+	<h1>Calorie Calculator</h1>
+	<form id="userDetails">
+		<div class="gen-style">
+		<fieldset>
+			<legend><b>Track Your Calorie Intake</b></legend>
+			<h3>Basic Details</h3>
+			<div class="row">
+				<div class="column">
+					<div class="inputGroup">
+						<label for="name">Name:</label><!-- <br class = "break"> -->
+						<input type="text" name="username" id="name" required>
+					</div>
+
+					<div class="inputGroup">
+						<label for="age">Age:</label><br class="break">
+						<input type="number" name="age" id="age" value=0 required>
+					</div> <!-- years --> 
+					<div class="inputGroup">
+						<label for="physicalLevel">Activity Level:</label><!-- <br class="break"> -->
+						<select id="physicalLevel">
+							<option value="0" selected>Select One</option>
+							<option value="1.2">Sitting/Lying all day</option>
+							<option value="1.3">Seated work/no exercise</option>
+							<option value="1.4">Seated work/light exercise</option>
+							<option value="1.5">Moderately physical work/No exercise</option>
+							<option value="1.6">Moderately physical work/Light exercise</option>
+							<option value="1.7">Moderately physical work/Heavy exercise</option>
+							<option value="1.8">Heavy work/Heavy exercise</option>
+							<option value="2.0">Above Average work/exercise</option>
+						</select>
+					</div>
+					<div class="inputGroup">
+						<label for="water">Water Intake(in litres): </label><!-- <br class="break"> -->
+						<input type="number" step="any" min=0 name="water" id="water" value = 0  required>
+					</div>
+				</div>
+				<div class="column">
+					<div class="inputGroup">
+						<label for="gender">Gender:</label><!-- <br class="break"> -->
+						<input type="radio" name="gender" id="genderMale" value="Male" required>Male<br class="break">
+						<input type="radio" name="gender" id="genderFemale" value = "Female">Female
+					</div> 
+					<div class="inputGroup">
+						<label for="weight">Weight(in kgs):</label><!-- <br class="break"> -->
+						<input type="number" name="weight" id="weight" step = "any" min = 0 value = 0  required>
+					</div> <!-- pounds -->
+					<div class="inputGroup">
+						<label for="height">Height(in cm):</label><!-- <br class="break"> -->
+						<input type="number" name="height" id="height" step = "any" min = 0 value=0  required>
+					</div>
+				</div> 
+			</div>
+			<hr>
+			<div  id="foodList1">
+				<h3>Add Items You Consumed Today!</h3>
+				<div class="row">
+					<div class="column">
+						<div class="inputGroup">
+							<label for ="food">Food Item:</label><br class="break">
+							<input type="text" name="food" id="food"  required>
+						</div>
+						<div class="inputGroup">
+							<label for = "carbs">Carbs(in g):</label><br class="break">	
+							<input type="number" name="carbs" id="carbs" value=0 min=0 step="any" required>
+						</div>
+						<div class="inputGroup">
+							<label for = "fats">Fats(in g):</label>	<br class="break">
+							<input type="number" name="fats" id="fats" value=0 min=0 step="any" required>
+						</div>
+						<div class="inputGroup">
+
+							<label for = "proteins">Protein(in g):</label><br class="break">
+							<input type="number" name="proteins" id="proteins" value=0 min=0 step="any" required>
+						</div>
+					</div>
+					<div class="column">
+						<button type="button" id = "addMoreFood">Add Item</button><br>
+						<button type="button" id = "deleteFood">Remove Items</button><br>
+						<div  id="removefood" class="hidden">
+							<input type="text" id="foodName" placeholder="Enter food name">
+							<button type = "button" id="remove">Remove</button>		
+						</div>
+					</div>
+				</div>
+				<hr>
+				<div class="row">
+					<button type ="button" id = "submit">CALCULATE CALORIE</button>
+				</div>
+				<div class="row">
+					<button type = "button" id = "clear1">CLEAR</button>
+				</div>
+
+			</fieldset>
+		</div>
+
+		</form>
+
+
+		<div id="printResult" class="hidden">
+		<div class="gen-style">
+			<h2>Report</h2>
+			<ul class="res">
+				<li id="printName">Heloo</li>
+				<li id="printAge"></li>
+				<li id="printGender"></li>
+				<li id="printCalReq"></li>
+				<li id="printCalIn"></li>
+			</ul>
+			<hr>	
+			<h2>Inference</h2>
+			<ul class="res">
+				<li id="printCalInfer">hi</li>
+				<li id="printWaterInfer"></li>
+
+			</ul>
+			<div id="foodItem" class="res2">
+				<a href="#" id="foodItemList">Click here to view your Food List</a>
+			</div>	
+			<div class="row">
+				<button type="button" id="clear2">CLEAR</button>
+			</div>
+		</div>
+		</div>
+
+
+		<script type="text/javascript" src = "task1.js"></script>
+	</body>
+	</html>
