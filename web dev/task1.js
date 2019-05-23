@@ -2,7 +2,7 @@ var addMoreItems = document.querySelector("#addMoreFood");
 var removeFood = document.querySelector("#deleteFood");
 var submit = document.querySelector("#submit");
 var form = document.querySelector("#userDetails");
-var hide = document.querySelector("#hide");
+var hide = document.querySelector(".hide");
 var hidden = document.querySelector(".hidden");
 var result = document.getElementById("printResult");
 var clear1 = document.querySelector("#clear1");
@@ -10,18 +10,23 @@ var clear2 = document.querySelector("#clear2");
 var foodItemList = document.querySelector("#foodItemList");
 var btn = document.querySelector("#remove"); 
 
+//getting items from local storage if exists
 var itemsArray = localStorage.getItem("items") ? JSON.parse(localStorage.getItem("items")) : [];
 var foodList = localStorage.getItem("foods") ? JSON.parse(localStorage.getItem("foods")) : [];
 
+//if no items exist, then creating two new items 
 localStorage.setItem("items",JSON.stringify(itemsArray));
 localStorage.setItem("foods",JSON.stringify(foodList));
 
 var data = JSON.parse(localStorage.getItem("items"));
 foodList = JSON.parse(localStorage.getItem("foods"));
+
+//variables used for checking later on
 var cal = 0;
 var wat = 0;
 var once = 0;
 
+//Class to store basic user info
 class calorieCounter {
 
 	constructor(name,age,height,weight,phyLevel,gender,calIntake,water) {
@@ -63,7 +68,9 @@ class calorieCounter {
 	getCalorieIntake(){
 		return this.calIntake;
 	}
-
+    
+    //calculates required calorie
+    //Formula used: Harris Benedict Formula
 	calcCalorieRequired(){
 		var calorie;
 
@@ -76,11 +83,13 @@ class calorieCounter {
 
 		this.calorieRequire = Math.round(calorie * this.phyLevel * 100)/100;
 	}
-
+    
+    //function to decrement calorie intake upon removal of an item
 	decrement(caloriePerFood){
 		this.calIntake -= caloriePerFood;
 	}
 
+    //comparing req. and consumed calorie
 	cmpCal(){
 		var msg;
 		if(this.calorieRequire == this.calIntake){
@@ -98,7 +107,8 @@ class calorieCounter {
 
 		return msg;
 	}
-
+    
+    //comapring qty of water consumed
 	cmpWater(){
 		var msg;
 		if(this.water >= 3.7 && this.gender == "Male" || this.water >= 2.7 && this.gender == "Female"){
@@ -116,6 +126,7 @@ class calorieCounter {
 
 }
 
+//class to store foodlist
 class calorieIntake {
 	constructor(food,carbs,fats,proteins){
 		this.food = food;
@@ -124,7 +135,8 @@ class calorieIntake {
 		this.proteins = proteins;
 
 	}
-
+    
+    //calculates calorie intake
 	calcCalorieIntake(){
 
 		var dailyCalorieIntake = 0;
@@ -146,13 +158,10 @@ class calorieIntake {
 	}
 }
 
-
-console.log(itemsArray);
-console.log(foodList);
-
+//used to set initial value to form inputs from local storage
 initialValue();
 
-
+//adding food items
 addMoreItems.addEventListener("click",function(){
 
 	var food = document.querySelector("#food");
@@ -178,6 +187,8 @@ else{
 
 });
 
+
+//removing food items
 removeFood.addEventListener("click",function(){
 	var removeFoodDiv = document.querySelector("#removefood");
 	if(foodList.length >= 1 && itemsArray.length < 1){
@@ -194,6 +205,7 @@ removeFood.addEventListener("click",function(){
 
 });
 
+//removing food items
 btn.addEventListener("click",function(){
 	var removeFoodDiv = document.querySelector("#removefood");
 	var flag = 0;
@@ -204,7 +216,6 @@ btn.addEventListener("click",function(){
 			if(foodList[i].food.toUpperCase() == foodName.value.toUpperCase()){
 				itemsArray[itemsArray.length-1].calIntake -= foodList[i].caloriePerFood;
 				foodList.splice(i,1);
-				console.log(itemsArray[0].calIntake);
 				flag = 1;
 				foodName.value = "";
 				removeFoodDiv.classList.add("hidden");
@@ -228,7 +239,7 @@ btn.addEventListener("click",function(){
 
 
 
-
+//submit form to calculate and compare calories
 submit.addEventListener("click",function(){
 
 	var name = document.querySelector("#name");
@@ -267,9 +278,9 @@ submit.addEventListener("click",function(){
 			display(calReq);
 
 
-			form.classList.add("hidden");
+			hide.classList.add("hidden");
 			result.classList.remove("hidden");
-			console.log("Cal: " + cal);
+
 			if(cal == 1 && wat == 1){
 
 				alert("Uh-Oh! You consume more than required amount of calories and water on a daily basis");	
@@ -287,7 +298,8 @@ submit.addEventListener("click",function(){
 			else if(cal == 0){
 				alert("Uh-Oh! You consume less calories than what is required");
 			}
-
+            
+            //pushing into local storage
 			itemsArray.push(calReq);
 			localStorage.setItem('items', JSON.stringify(itemsArray));
 
@@ -305,43 +317,12 @@ submit.addEventListener("click",function(){
 
 
 
-
-clear1.addEventListener("click",function(){
-	
-	localStorage.clear();
-
-	userDetailReset();
-	foodReset();
-	foodList = [];
-	itemsArray = [];
-	var foodItem = document.querySelector("#foodItem");
-	foodItem.removeChild(foodItem.lastChild);
-	
-	form.classList.remove("hidden");
-	result.classList.add("hidden");
-	
-
+//clear input field
+clear1.addEventListener("click",function(){	
+	reset();
 });
 
-
-clear2.addEventListener("click",function(){
-	
-	localStorage.clear();
-
-	userDetailReset();
-	foodReset();
-	foodList = [];
-	itemsArray = [];
-	var foodItem = document.querySelector("#foodItem");
-	foodItem.removeChild(foodItem.lastChild);
-	
-	form.classList.remove("hidden");
-	result.classList.add("hidden");
-	
-
-});
-
-
+//display food list
 foodItemList.addEventListener("click",function(){
 
 	if(!once){
@@ -381,7 +362,27 @@ foodItemList.addEventListener("click",function(){
 	}
 });
 
+//reset values
+clear2.addEventListener("click",function(){
+	reset();
+});
 
+
+function reset(){
+	localStorage.clear();
+
+	userDetailReset();
+	foodReset();
+	foodList = [];
+	itemsArray = [];
+	var foodItem = document.querySelector("#foodItem");
+	foodItem.removeChild(foodItem.lastChild);
+	
+	form.classList.remove("hidden");
+	result.classList.add("hidden");
+}
+
+//used to get gender of user
 function genderFind(){
 	if(document.getElementById('genderMale').checked){
 		return document.getElementById("genderMale").value;
@@ -393,6 +394,7 @@ function genderFind(){
 		return "";
 }
 
+//reset food details
 function foodReset(){
 	var food = document.querySelector("#food");
 	var carbs = document.getElementById('carbs');
@@ -405,6 +407,7 @@ function foodReset(){
 	proteins.value = 0;
 }
 
+//reset user details
 function userDetailReset(){
 	var name = document.querySelector("#name");
 	var age = document.querySelector("#age");
@@ -438,8 +441,6 @@ function initialValue(){
 	var fats = document.querySelector("#fats");
 	var proteins = document.querySelector("#proteins");
 
-	console.log(foodList);
-	console.log(itemsArray);
 	var len = data.length - 1;
 	var lenF = foodList.length - 1;
 
