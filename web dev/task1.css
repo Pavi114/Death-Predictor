@@ -94,6 +94,8 @@ table , td{
 @media (min-width: 320px) and (max-width: 480px){
 	#userDetails{
 		margin: 0;
+		background-color: #fcc1b6;
+		border-radius: 8px;
 	}
 
 	.row {
@@ -118,6 +120,9 @@ table , td{
 		top: 50px;
 		bottom: 100px;
 		position: absolute;
+		background-color: #A9A9A9;
+		border-radius: 8px;
+		padding: 1em;
 	}
 	.res {
 		display: flex;
@@ -167,11 +172,10 @@ table , td{
 	}
 
 	#printResult{
-		margin: 0 auto;
-		top: 50px;
-		bottom: 100px;
-		position: absolute;
-		align-self: center;
+		margin: 1em auto;
+		background-color: #A9A9A9;
+		border-radius: 8px;
+		padding: 1em;
 	}
 
 	.res {

@@ -286,7 +286,7 @@ submit.addEventListener("click",function(){
 				alert("Uh-Oh! You consume more than required amount of calories and water on a daily basis");	
 			}
 			else if(cal == 0 && wat == 1){
-				alert("Uh-Oh! You need to consume less calories and more water in a day");
+				alert("Uh-Oh! You need to consume more calories and water in a day");
 			}
 			else if(cal == 1){
 				alert("Uh-Oh! You consume more than required amount of calories in a day.");
