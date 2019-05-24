@@ -3,7 +3,6 @@ body {
 	background-image: url(https://images.unsplash.com/photo-1447078806655-40579c2520d6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80);
 	background-position: center;
 	background-size: cover;
-	background-repeat: no-repeat;
 	font-size: 1.3vw;
 }
 
@@ -52,10 +51,12 @@ table {
 tr {
 	width: 100%;
 	text-align: center;
+	margin-right: 1em;
+	border: 1px solid black;
 }
 
-table , td{
-	border: 1px solid black;
+td{ 
+	border-right: 1px solid black;
 
 }
 
@@ -168,6 +169,18 @@ table , td{
     	flex-direction: row;
     	margin-top: 0.1em;
     }
+
+    .res2 {
+	display: flex;
+	flex-direction: column;
+	font-family: "Georgia",serif;
+	margin: 0.5em 0.05em;
+   }
+
+   td {
+   	font-size: 2vw;
+   }
+
 }
 
 
@@ -227,12 +240,6 @@ table , td{
 	.res2 a {
 		margin: 0.5em;
 	}
-
-    /*.horizon {
-    	display: inline-flex;
-    	flex-direction: row;
-    	margin-top: 0.1em;
-    }*/
 
 
 }
