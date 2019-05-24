@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Mortem</string>
+    <string name="guess">Guess</string>
+    <string name="enter_your_guess">Enter Your Guess</string>
+    <string name="check">Check</string>
+    <string name="win">Yayy! You have guessed the right age. You too,like your father can reap souls at exactly their pre-ordained time</string>
+    <string name="failLess">Uh-Oh! Try Something higher</string>
+    <string name="failhigh">Uh-Oh! Try something lower</string>
+    <string name="lost">Game Over! You Lost.</string>
+    <string name="enter_number_to_guess">Enter Number</string>
+    <string name="_1_100">1-100</string>
+    <string name="enter_number_of_guesses">Enter Number Of Guesses</string>
+    <string name="greater_than_0">Greater than 0 :)</string>
+    <string name="reset">RESET</string>
+    <string name="optimal_trials">Optimal trials:</string>
+    <string name="trials_over_0">Trials over: 0</string>
+    <string name="wins_0">Wins: 0</string>
+    <string name="loss_0">Loss: 0</string>
+</resources>
