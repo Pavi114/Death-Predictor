@@ -96,6 +96,17 @@ table , td{
 	body{
 		font-size: 5vw;
 	}
+
+	h1 {
+	font-family: "Verdana",sans-serif;
+	text-shadow: 0 0 3px #FF0000;
+	text-align: center;
+	margin-top: 50px;
+	margin-bottom: 20px;
+	font-size: 8vw;
+	color: #F9D342;
+   }
+
 	h2,h3 {
 		font-size: 6vw;
 	}
