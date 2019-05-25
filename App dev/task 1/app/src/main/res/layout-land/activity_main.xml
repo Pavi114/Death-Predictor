@@ -40,9 +40,9 @@
                     android:textColor="#f5f5dc"
                     android:textStyle="bold"
                     android:layout_weight="1"
-                    android:padding="5dp"
-                    android:textSize="22sp"
-                    android:layout_margin="15dp" />
+                    android:padding="4dp"
+                    android:textSize="15sp"
+                    android:layout_margin="10dp" />
 
 
                 <EditText
@@ -52,10 +52,10 @@
                     android:inputType="number"
                     android:layout_weight="1"
                     android:layout_marginRight="10dp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="16dp"
                     android:layout_marginLeft="10dp"
                     android:padding="5dp"
-                    android:textSize="22sp"
+                    android:textSize="18sp"
                     android:textColor="#f5f5dc"
                     android:background="@drawable/round_text"
                     android:hint="@string/_1_100"/>
@@ -104,7 +104,7 @@
                     android:textColor="#00FF00"
                     android:textAlignment="center"
                     android:background="@drawable/round_text"
-                    android:textSize="20sp"
+                    android:textSize="15sp"
                     android:text="WINS : 0"/>
                 <TextView
                     android:id="@+id/loss"
@@ -117,7 +117,7 @@
                     android:padding="10dp"
                     android:textAlignment="center"
                     android:background="@drawable/round_text"
-                    android:textSize="20sp"
+                    android:textSize="15sp"
                     android:text="LOSS : 0"/>
             </LinearLayout>
             <Button

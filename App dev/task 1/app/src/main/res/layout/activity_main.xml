@@ -29,11 +29,11 @@
                 android:background="@drawable/round_text"
                 android:textColor="#f5f5dc"
                 android:textStyle="bold"
-                android:layout_marginTop="80dp"
+                android:layout_marginTop="50dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:padding="10dp"
-                android:textSize="30sp"
+                android:textSize="25sp"
                  />
 
 
@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:padding="7dp"
-                android:textSize="30dp"
+                android:textSize="25sp"
                 android:inputType="number"
                 android:textColor="#f5f5dc"
                 android:background="@drawable/round_text"
@@ -75,12 +75,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:padding="20dp"
+                android:padding="15dp"
                 android:layout_gravity="center_vertical"
                 android:textAlignment="center"
                 android:textColor="#00FF00"
                 android:background="@drawable/round_text"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:text="@string/wins_0"/>
             <TextView
                 android:id="@+id/loss"
@@ -89,8 +89,8 @@
                 android:background="@drawable/round_text"
                 android:layout_margin="10dp"
                 android:layout_gravity="center_vertical"
-                android:padding="20dp"
-                android:textSize="25sp"
+                android:padding="15dp"
+                android:textSize="20sp"
                 android:textAlignment="center"
                 android:textColor="#FF0000"
                 android:text="@string/loss_0"/>

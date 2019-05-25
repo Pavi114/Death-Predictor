@@ -22,4 +22,9 @@
     <string name="warn2">Please Enter a value</string>
     <string name="fail3">Uh-Oh! Keep Practicing to reap souls on time</string>
     <string name="winyay">Yayy! You can reap souls on time now</string>
+    <string name="last_guess">Last Guess:</string>
+    <string name="trials_over_1">Trials over : 0</string>
+    <string name="slide_to_guess">Slide To Guess</string>
+    <string name="optimal_trials_0">Optimal trials: 0</string>
+    <string name="wins_4">WINS : 0</string>
 </resources>

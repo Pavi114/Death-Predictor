@@ -27,7 +27,7 @@
             android:background="@drawable/round_text"
             android:padding="10dp"
             android:layout_margin="7dp"
-            android:textSize="25sp"
+            android:textSize="20sp"
             android:textColor="#FF0000"
             android:text="@string/loss_0"/>
         <TextView
@@ -38,7 +38,7 @@
             android:layout_margin="7dp"
             android:layout_below="@id/loss"
             android:padding="10dp"
-            android:textSize="25sp"
+            android:textSize="20sp"
             android:textColor="#00FF00"
             android:text="@string/wins_0"/>
         <TextView

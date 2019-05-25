@@ -30,7 +30,7 @@
             android:layout_margin="7dp"
             android:layout_marginLeft="12dp"
             android:layout_weight="1"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:textColor="#FF0000"
             android:textAlignment="center"
             android:text="LOSS: 0"/>
@@ -42,10 +42,10 @@
             android:layout_margin="10dp"
             android:layout_weight="1"
             android:padding="7dp"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:textColor="#00FF00"
             android:textAlignment="center"
-            android:text="WINS : 0"/>
+            android:text="@string/wins_4"/>
         <TextView
             android:id="@+id/optimalTrials"
             android:layout_width="0dp"
@@ -53,11 +53,11 @@
             android:background="@drawable/round_text"
             android:layout_weight="1"
             android:padding="7dp"
-            android:textSize="20sp"
+            android:textSize="12sp"
             android:layout_margin="10dp"
             android:textAlignment="center"
             android:textColor="#f5f5dc"
-            android:text="Optimal trials: 0"/>
+            android:text="@string/optimal_trials_0"/>
 
     </LinearLayout>
 
@@ -68,11 +68,11 @@
         android:background="@drawable/round_text"
         android:textStyle="bold"
         android:padding="10dp"
-        android:textSize="20sp"
+        android:textSize="15sp"
         android:layout_margin="10dp"
         android:layout_gravity="center_horizontal"
         android:textColor="@color/beige"
-        android:text="Slide To Guess"/>
+        android:text="@string/slide_to_guess"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -136,21 +136,21 @@
             android:background="@drawable/round_text"
             android:textStyle="bold"
             android:padding="5dp"
-            android:textSize="20dp"
+            android:textSize="15sp"
             android:textColor="#f5f5dc"
             android:layout_margin="5dp"
-            android:text="Last Guess: "/>
+            android:text="@string/last_guess"/>
         <TextView
             android:id="@+id/trialsOver"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/round_text"
             android:padding="5dp"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:layout_margin="5dp"
             android:textColor="#f5f5dc"
             android:layout_alignParentRight="true"
-            android:text="Trials over : 0" />
+            android:text="@string/trials_over_1" />
 
     </RelativeLayout>
 
