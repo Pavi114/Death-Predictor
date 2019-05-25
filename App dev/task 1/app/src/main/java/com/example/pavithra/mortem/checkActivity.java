@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,8 +35,6 @@ public class checkActivity extends AppCompatActivity {
         wins = bd.getInt("wins");
         loss = bd.getInt("loss");
 
-
-
         TextView winText = (TextView)findViewById(R.id.wins);
         winText.setText(String.format("Wins: %s", Integer.toString(wins)));
 
@@ -44,133 +43,80 @@ public class checkActivity extends AppCompatActivity {
 
         final TextView optimalTrials = (TextView)findViewById(R.id.optimalTrials);
         final Integer optimalGuess = binary(numToGuess);
-        optimalTrials.append(optimalGuess.toString());
+
+        optimalTrials.setText(String.format("Optimal Guesses : %s", optimalGuess.toString()));
+
+        //landscape
+
+        final SeekBar guessNum2 = (SeekBar) findViewById(R.id.guessNum2);
+        guessNum2.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+                TextView seekbarValue = (TextView)findViewById(R.id.seekbarValue);
+                seekbarValue.setText(String.format("%d / %d", guessNum2.getProgress(), guessNum2.getMax()));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                Button check = (Button)findViewById(R.id.check);
+                check.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        trials++;
+                        trialsOverSet();
+                        Integer guessedNum = guessNum2.getProgress();
+                        int result = compare(numToGuess,guessedNum);
+                        setBgColor(Math.abs(numToGuess-guessedNum));
+                        result(result,optimalGuess);
+                        lastGuessSet(guessedNum);
+                    }
+                });
+
+            }
+        });
+
+
+        //potrait
 
         Button check = (Button)findViewById(R.id.check);
-
         check.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View v) {
 
                 EditText guessNum = (EditText) findViewById(R.id.guessNum);
-                TextView trialsOver = (TextView) findViewById(R.id.trialsOver);
-
                 if(!guessNum.getText().toString().matches("")){
-                    Integer guessedNum = Integer.parseInt(guessNum.getText().toString());
-                    if(guessedNum < 1 || guessedNum > 100){
-                        Toast.makeText(getApplicationContext(), "Please enter number from 1-100", Toast.LENGTH_SHORT).show();
-                    }
-                   else{
+                    int guessedNum = Integer.parseInt(guessNum.getText().toString());
+                    if(guessedNum >= 1 && guessedNum <= 100){
                         trials++;
-                        trialsOver.setText("Trials Over: " + Integer.toString(trials));
+                        trialsOverSet();
                         int result = compare(numToGuess,guessedNum);
-                        setBgColor(result,Math.abs(numToGuess-guessedNum));
-                        TextView lastGuess = (TextView)findViewById(R.id.lastGuess);
-                         if(trials < optimalGuess) {
-                             if (result == 0) {
-                                 LinearLayout ll = (LinearLayout)findViewById(R.id.checkAct2);
-                                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
-                                 lp.setMargins(0,10,0,0);
-                                 lp.gravity=Gravity.CENTER_HORIZONTAL;
-                                 Toast.makeText(getApplicationContext(),"Yayy! You can reap souls at time now",Toast.LENGTH_LONG).show();
-
-                                 Button back = new Button(getApplicationContext());
-                                 back.setText("Go Again");
-                                 back.setLayoutParams(lp);
-                                 back.setTextColor(getColor(R.color.colorPrimaryDark));
-                                 back.setBackground(getResources().getDrawable(R.drawable.round_button));
-                                 ll.addView(back);
-
-                                 Increment();
-                                 TextView winText = (TextView)findViewById(R.id.wins);
-                                 winText.setText("Wins: " + Integer.toString(wins));
-
-                                 back.setOnClickListener(new View.OnClickListener() {
-                                     @Override
-                                     public void onClick(View v) {
-                                         Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                                         i.putExtra("wins",wins);
-                                         i.putExtra("loss",loss);
-                                         startActivity(i);
-                                     }
-                                 });
-
-
-
-                             } else {
-                                 if (result == -1) {
-                                    Toast.makeText(getApplicationContext(),R.string.failLess,Toast.LENGTH_LONG).show();
-                                 } else if (result == 1) {
-                                     Toast.makeText(getApplicationContext(),R.string.failhigh,Toast.LENGTH_LONG).show();
-                                 }
-                                 lastGuess.setText("Last Guess: " + guessedNum.toString());
-
-                             }
-                         }
-                         else if(trials == optimalGuess){
-                             if(result == 0){
-                                 LinearLayout ll = (LinearLayout)findViewById(R.id.checkAct);
-                                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
-                                 lp.setMargins(0,10,0,0);
-                                 lp.gravity=Gravity.CENTER_HORIZONTAL;
-                                 Toast.makeText(getApplicationContext(),"Yayy! You can reap souls at time now",Toast.LENGTH_LONG).show();
-                                 
-                                 Button back = new Button(getApplicationContext());
-                                 back.setText("Go Again");
-                                 back.setLayoutParams(lp);
-                                 back.setTextColor(getColor(R.color.colorPrimaryDark));
-                                 ll.addView(back);
-                                 Increment();
-                                 TextView winText = (TextView)findViewById(R.id.wins);
-                                 winText.setText("Wins: " + Integer.toString(wins));
-
-                                 back.setOnClickListener(new View.OnClickListener() {
-                                     @Override
-                                     public void onClick(View v) {
-                                         Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                                         i.putExtra("wins",wins);
-                                         i.putExtra("loss",loss);
-                                         startActivity(i);
-                                     }
-                                 });
-                             }
-                             else{
-                                 Toast.makeText(getApplicationContext(), R.string.lost, Toast.LENGTH_SHORT).show();
-                                 decrement();
-                                 Intent i = new Intent(getApplicationContext(),MainActivity.class);
-                                 i.putExtra("wins",wins);
-                                 i.putExtra("loss",loss);
-                                 startActivity(i);
-                             }
-                         }
-
-                        else{
-                             Toast.makeText(getApplicationContext(), R.string.lost, Toast.LENGTH_SHORT).show();
-                             decrement();
-                             Intent i = new Intent(getApplicationContext(),MainActivity.class);
-                             i.putExtra("wins",wins);
-                             i.putExtra("loss",loss);
-                             startActivity(i);
-                          }
-
-                   }
-                   guessNum.setText("");
+                        setBgColor(Math.abs(numToGuess-guessedNum));
+                        result(result,optimalGuess);
+                        lastGuessSet(guessedNum);
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(),getString(R.string.warn),Toast.LENGTH_LONG).show();
+                    }
+                    guessNum.setText("");
                 }
                 else{
-                    Toast.makeText(getApplicationContext(),"Please Enter a value",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),getString(R.string.warn2),Toast.LENGTH_LONG).show();
                 }
 
 
             }
         });
-
-
-
     }
 
-
-    public int compare(Integer numToGuess,Integer guessedNum){
+    //compare guessed number and original number
+    public int compare(int numToGuess,int guessedNum){
         int res;
         if(numToGuess == guessedNum){
             res = 0;
@@ -184,6 +130,7 @@ public class checkActivity extends AppCompatActivity {
         return res;
     }
 
+    //finding optimal trials using binary search
     public int binary(Integer num){
         int guess = 1;
         int[] numArray = new int[100];
@@ -213,78 +160,118 @@ public class checkActivity extends AppCompatActivity {
         return guess;
     }
 
-    public void setBgColor(int res,int diff){
-        LinearLayout checkAct = (LinearLayout) findViewById(R.id.checkAct);
+    //change bg color based on number guessed
+    public void setBgColor(int diff){
         if(diff == 0){
-            checkAct.setBackgroundColor(getResources().getColor(R.color.Green));
+            getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.diff0));
         }
         else if(diff < 5){
-            checkAct.setBackgroundColor(Color.parseColor("#24FF00"));
+            getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.diff0));
         }
         else if(diff < 10){
-            checkAct.setBackgroundColor(Color.parseColor("#35FF00"));
+            getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.diff10));
         }
         else if(diff < 15){
-            checkAct.setBackgroundColor(Color.parseColor("#47FF00"));
+            getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.diff15));
         }
         else if(diff < 20){
-            checkAct.setBackgroundColor(Color.parseColor("#6AFF00"));
+            getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.diff20));
         }
         else if(diff < 25){
-            checkAct.setBackgroundColor(Color.parseColor("#7CFF00"));
+            getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.diff25));
         }
         else if(diff < 30){
-            checkAct.setBackgroundColor(Color.parseColor("#9FFF00"));
+            getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.diff30));
         }
         else if(diff < 35){
-            checkAct.setBackgroundColor(Color.parseColor("#C2FF00"));
+            getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.diff35));
         }
         else if(diff < 40){
-            checkAct.setBackgroundColor(Color.parseColor("#D4FF00"));
+            getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.diff40));
         }
         else if(diff < 45){
-            checkAct.setBackgroundColor(Color.parseColor("#E5FF00"));
+            getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.diff45));
         }
         else if(diff < 50){
-            checkAct.setBackgroundColor(Color.parseColor("#FFF600"));
+            getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.diff50));
         }
         else if(diff < 55){
-            checkAct.setBackgroundColor(Color.parseColor("#FFD300"));
+            getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.diff55));
         }
         else if(diff < 60){
-            checkAct.setBackgroundColor(Color.parseColor("#FFC100"));
+            getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.diff60));
         }
         else if(diff < 65){
-            checkAct.setBackgroundColor(Color.parseColor("#FF9E00"));
+            getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.diff65));
         }
         else if(diff < 70){
-            checkAct.setBackgroundColor(Color.parseColor("#FF8C00"));
+            getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.diff70));
         }
         else if(diff < 75){
-            checkAct.setBackgroundColor(Color.parseColor("#FF7B00"));
+            getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.diff75));
         }
         else if(diff < 80){
-            checkAct.setBackgroundColor(Color.parseColor("#FF5700"));
+            getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.diff80));
         }
         else if(diff < 85){
-            checkAct.setBackgroundColor(Color.parseColor("#FF4600"));
+            getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.diff85));
         }
         else if(diff < 90){
-            checkAct.setBackgroundColor(Color.parseColor("#FF2300"));
+            getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.diff90));
         }
         else if(diff < 95){
-            checkAct.setBackgroundColor(Color.parseColor("#FF1100"));
+            getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.diff95));
         }
         else if(diff <= 100){
-            checkAct.setBackgroundColor(Color.parseColor("#FF0000"));
+            getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.diff100));
         }
     }
 
+    //Increments Win value
     private void Increment(){
         wins++;
     }
 
+    //Increments Loss value
     private void decrement(){
         loss++;
+    }
+
+    //Intent call to mainactivity
+    private void intentCall(){
+        Intent i = new Intent(getApplicationContext(), MainActivity.class);
+        i.putExtra("wins",wins);
+        i.putExtra("loss",loss);
+        startActivity(i);
+    }
+
+    private void trialsOverSet(){
+        TextView trialsOver = (TextView) findViewById(R.id.trialsOver);
+        trialsOver.setText(String.format("%s%s", getString(R.string.trials_over), Integer.toString(trials)));
+    }
+    private void lastGuessSet(int guessedNum){
+        TextView lastGuess = (TextView)findViewById(R.id.lastGuess);
+        lastGuess.setText(String.format("Last Guess: %s", Integer.toString(guessedNum)));
+    }
+
+    private void result(int res,int optimalGuess){
+        if(res == 0 && trials <= optimalGuess){
+            Toast.makeText(getApplicationContext(),getString(R.string.winyay),Toast.LENGTH_LONG).show();
+            Increment();
+            TextView winText = (TextView)findViewById(R.id.wins);
+            winText.setText(String.format("Wins: %s", Integer.toString(wins)));
+            intentCall();
+        }
+        else if(res == 0){
+            Toast.makeText(getApplicationContext(),getString(R.string.fail3),Toast.LENGTH_LONG).show();
+            decrement();
+            intentCall();
+        }
+        else if (res == -1) {
+            Toast.makeText(getApplicationContext(),R.string.failLess,Toast.LENGTH_LONG).show();
+        }
+        else if (res == 1) {
+            Toast.makeText(getApplicationContext(),R.string.failhigh,Toast.LENGTH_LONG).show();
+        }
     }
 }

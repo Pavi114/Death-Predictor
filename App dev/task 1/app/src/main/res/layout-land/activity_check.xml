@@ -1,72 +1,163 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/checkAct"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".checkActivity">
-
-    <RelativeLayout
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/checkAct2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/round_body"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_gravity="center"
+        android:padding="10dp"
+        android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/dark_red"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_margin="5dp"
         >
         <TextView
             android:id="@+id/loss"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Loss: 0"/>
+            android:background="@drawable/round_text"
+            android:padding="7dp"
+            android:layout_margin="7dp"
+            android:layout_marginLeft="12dp"
+            android:layout_weight="1"
+            android:textSize="20sp"
+            android:textColor="#FF0000"
+            android:textAlignment="center"
+            android:text="LOSS: 0"/>
         <TextView
             android:id="@+id/wins"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_below="@id/loss"
-            android:text="wins"/>
+            android:background="@drawable/round_text"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:padding="7dp"
+            android:textSize="20sp"
+            android:textColor="#00FF00"
+            android:textAlignment="center"
+            android:text="WINS : 0"/>
         <TextView
             android:id="@+id/optimalTrials"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:text="Optimal trials: "/>
-        <TextView
-            android:id="@+id/trialsOver"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/optimalTrials"
-            android:text="Trials over"
-            android:layout_alignParentRight="true"/>
-    </RelativeLayout>
+            android:background="@drawable/round_text"
+            android:layout_weight="1"
+            android:padding="7dp"
+            android:textSize="20sp"
+            android:layout_margin="10dp"
+            android:textAlignment="center"
+            android:textColor="#f5f5dc"
+            android:text="Optimal trials: 0"/>
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/enterGuess"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/enter_your_guess"/>
-
+        android:background="@drawable/round_text"
+        android:textStyle="bold"
+        android:padding="10dp"
+        android:textSize="20sp"
+        android:layout_margin="10dp"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/beige"
+        android:text="Slide To Guess"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="1"
+            android:layout_weight="1"
+            android:textColor="@color/beige"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="100"
+            android:textAlignment="viewEnd"
+            android:textColor="@color/beige"
+            android:layout_weight="1"
+            android:gravity="end" />
+    </LinearLayout>
+    <SeekBar
+        android:id="@+id/guessNum2"
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="100"
+        android:min="1"
+        android:progress="1" />
     <EditText
         android:id="@+id/guessNum"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="number"/>
+        android:visibility="gone" />
 
     <TextView
-        android:id="@+id/lastGuess"
-        android:layout_width="match_parent"
+        android:id="@+id/seekbarValue"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Last Guess: "/>
+        android:textColor="@color/beige"
+        android:text="0/100"
+        android:layout_margin="6dp"
+        android:layout_gravity="center_horizontal"/>
 
     <Button
         android:id="@+id/check"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:textColor="#f5f5dc"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/round_button"
         android:text="@string/check"/>
 
-    <ProgressBar
-        android:id="@+id/progressBar2"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/lastGuess"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_text"
+            android:textStyle="bold"
+            android:padding="5dp"
+            android:textSize="20dp"
+            android:textColor="#f5f5dc"
+            android:layout_margin="5dp"
+            android:text="Last Guess: "/>
+        <TextView
+            android:id="@+id/trialsOver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_text"
+            android:padding="5dp"
+            android:textSize="20sp"
+            android:layout_margin="5dp"
+            android:textColor="#f5f5dc"
+            android:layout_alignParentRight="true"
+            android:text="Trials over : 0" />
+
+    </RelativeLayout>
+
+
+
+
+
 
 </LinearLayout>
+

@@ -1,24 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/checkAct"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/bgColor"
-    android:orientation="vertical"
-    tools:context=".checkActivity">
-
-    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/checkAct2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/round_body"
-        android:layout_gravity="center_horizontal"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="50dp"
         android:padding="10dp"
         android:orientation="vertical">
 
@@ -36,7 +27,8 @@
             android:background="@drawable/round_text"
             android:padding="10dp"
             android:layout_margin="7dp"
-            android:textSize="20dp"
+            android:textSize="25sp"
+            android:textColor="#FF0000"
             android:text="@string/loss_0"/>
         <TextView
             android:id="@+id/wins"
@@ -46,7 +38,8 @@
             android:layout_margin="7dp"
             android:layout_below="@id/loss"
             android:padding="10dp"
-            android:textSize="20dp"
+            android:textSize="25sp"
+            android:textColor="#00FF00"
             android:text="@string/wins_0"/>
         <TextView
             android:id="@+id/optimalTrials"
@@ -57,6 +50,7 @@
             android:textSize="20dp"
             android:layout_margin="7dp"
             android:layout_alignParentRight="true"
+            android:textColor="#f5f5dc"
             android:text="@string/optimal_trials"/>
         <TextView
             android:id="@+id/trialsOver"
@@ -67,8 +61,10 @@
             android:textSize="20dp"
             android:layout_margin="7dp"
             android:layout_below="@id/optimalTrials"
+            android:textColor="#f5f5dc"
             android:text="@string/trials_over_0"
             android:layout_alignParentRight="true"/>
+
     </RelativeLayout>
 
     <LinearLayout
@@ -87,7 +83,15 @@
             android:textStyle="bold"
             android:padding="10dp"
             android:textSize="20dp"
-            android:layout_margin="10dp"/>
+            android:layout_margin="10dp"
+            android:textColor="#f5f5dc"/>
+        <SeekBar
+            android:id="@+id/guessNum2"
+            style="@style/Widget.AppCompat.SeekBar.Discrete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            />
 
         <EditText
             android:id="@+id/guessNum"
@@ -98,6 +102,7 @@
             android:textSize="20dp"
             android:inputType="number"
             android:background="@drawable/round_text"
+            android:textColor="#f5f5dc"
             android:hint="@string/_1_100"/>
 
         <TextView
@@ -108,6 +113,7 @@
             android:textStyle="bold"
             android:padding="10dp"
             android:textSize="20dp"
+            android:textColor="#f5f5dc"
             android:layout_margin="10dp"
             android:text="Last Guess: "/>
 
@@ -116,11 +122,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
+            android:textColor="#f5f5dc"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/round_button"
             android:text="@string/check"/>
 
     </LinearLayout>
 
-</LinearLayout>
-</LinearLayout>
+   </LinearLayout>
+
+<!--</LinearLayout>-->

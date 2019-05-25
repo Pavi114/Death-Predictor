@@ -3,6 +3,7 @@
 package com.example.pavithra.mortem;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,21 +14,30 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    int wins = 0;
-    int loss = 0;
+    static int wins = 0;
+    static int loss = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        int Wins,Loss;
         Intent intent = getIntent();
         Bundle bd = intent.getExtras();
         if(bd != null){
-            wins = bd.getInt("wins");
-            loss = bd.getInt("loss");
+            Wins = bd.getInt("wins");
+            Loss = bd.getInt("loss");
             TextView winText = (TextView)findViewById(R.id.wins);
             TextView lossText = (TextView)findViewById(R.id.loss);
+            if(Wins > wins){
+                getWindow().getDecorView().setBackgroundColor(Color.parseColor("#00FF00"));
+            }
+            else if(Loss > loss){
+                getWindow().getDecorView().setBackgroundColor(Color.parseColor("#FF0000"));
+            }
+            wins = Wins;
+            loss = Loss;
             winText.setText(String.format("Wins: %s", Integer.toString(wins)));
             lossText.setText(String.format("Loss: %s", Integer.toString(loss)));
         }
@@ -69,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
                 text1.setText("");
                 winText.setText(String.format("Wins: %s", Integer.toString(wins)));
                 lossText.setText(String.format("Loss: %s", Integer.toString(loss)));
+                getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.bgColor));
             }
         });
 

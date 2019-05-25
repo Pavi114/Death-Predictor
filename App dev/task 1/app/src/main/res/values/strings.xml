@@ -16,4 +16,10 @@
     <string name="trials_over_0">Trials over: 0</string>
     <string name="wins_0">Wins: 0</string>
     <string name="loss_0">Loss: 0</string>
+    <string name="go_again">Go Again</string>
+    <string name="trials_over">Trials Over:</string>
+    <string name="warn">Please enter a value between 1-100</string>
+    <string name="warn2">Please Enter a value</string>
+    <string name="fail3">Uh-Oh! Keep Practicing to reap souls on time</string>
+    <string name="winyay">Yayy! You can reap souls on time now</string>
 </resources>

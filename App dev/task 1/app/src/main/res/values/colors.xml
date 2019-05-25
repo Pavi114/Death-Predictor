@@ -1,12 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorPrimary">#353839</color>
+    <color name="colorPrimaryDark">#0e1111</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="Green">#00FF00</color>
-    <color name="bgColor">#383838</color>
+    <color name="bgColor">#414a4c</color>
     <color name="marooon">#7e0000</color>
     <color name="dark_red">#660000</color>
     <color name="medium_red">#b50000</color>
     <color name="darker_red">#4d0000</color>
+    <color name="beige">#f5f5dc</color>
+    <color name="diff0">#24FF00</color>
+    <color name="diff5">#24FF00</color>
+    <color name="diff10">#35FF00</color>
+    <color name="diff15">#47FF00</color>
+    <color name="diff20">#6AFF00</color>
+    <color name="diff25">#7CFF00</color>
+    <color name="diff30">#9FFF00</color>
+    <color name="diff35">#C2FF00</color>
+    <color name="diff40">#D4FF00</color>
+    <color name="diff45">#E5FF00</color>
+    <color name="diff50">#FFF600</color>
+    <color name="diff55">#FFD300</color>
+    <color name="diff60">#FFC100</color>
+    <color name="diff65">#FF9E00</color>
+    <color name="diff70">#FF8C00</color>
+    <color name="diff75">#FF7B00</color>
+    <color name="diff80">#FF5700</color>
+    <color name="diff85">#FF4600</color>
+    <color name="diff90">#FF2300</color>
+    <color name="diff95">#FF1100</color>
+    <color name="diff100">#FF0000</color>
 </resources>
