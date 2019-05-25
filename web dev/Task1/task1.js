@@ -169,20 +169,26 @@ addMoreItems.addEventListener("click",function(){
 	var fats = document.querySelector("#fats");
 	var proteins = document.querySelector("#proteins");
 
-	if(!(food.value == "" || parseFloat(carbs.value) <= 0
-		|| parseFloat(fats.value) <= 0 || parseFloat(proteins.value) <= 0)){
+	if(!(food.value == "" || carbs.value == ""
+		|| fats.value == "" || proteins.value == "")){
 
-		var foodDetails = new calorieIntake(food.value,parseFloat(carbs.value),parseFloat(fats.value),parseFloat(proteins.value));
-	foodDetails.calCaloriePerFood();
-	foodList.push(foodDetails);
+      if(!(parseFloat(carbs.value) <= 0 || parseFloat(fats.value) <= 0 || parseFloat(proteins.value) <= 0)){
 
-	localStorage.setItem("foods",JSON.stringify(foodList));
-	foodReset();
+      	var foodDetails = new calorieIntake(food.value,parseFloat(carbs.value),parseFloat(fats.value),parseFloat(proteins.value));
+	    foodDetails.calCaloriePerFood();
+	    foodList.push(foodDetails);
 
-}
-else{
-	alert("Please enter valid values");
-}
+	    localStorage.setItem("foods",JSON.stringify(foodList));
+	    foodReset();
+
+      }
+      else{
+      	alert("Please enter valid values");
+      }
+    }
+    else{
+	   alert("Please enter valid values");
+    }
 
 
 });
@@ -260,7 +266,7 @@ submit.addEventListener("click",function(){
 		|| parseFloat(weight.value) <= 0 || parseFloat(water.value) <= 0 
 		|| gender == "" || parseFloat(phyLevel.value) <= 0 )){
 
-		if(!(food.value == "" && carbs.value == 0 && proteins.value == 0 && fats.value == 0)){
+		if(!(food.value == "" || carbs.value == 0 || proteins.value == 0 || fats.value == 0)){
 
 			var foodDetails = new calorieIntake(food.value,parseFloat(carbs.value),parseFloat(fats.value),parseFloat(proteins.value));
 			foodDetails.calCaloriePerFood();
