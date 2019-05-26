@@ -70,15 +70,6 @@ td{
 	padding: 1em;
 }
 
-
-.res2 {
-	display: flex;
-	flex-direction: column;
-	font-family: "Georgia",serif;
-	margin: 0.5em 1.5em;
-}
-
-
 .inputGroup {
 	display: flex;
 	flex-wrap: wrap;
@@ -135,20 +126,12 @@ td{
 		display: none;
 	}
 
-	#printResult{
+	.printResult{
 		margin: 0 auto;
 		background-color: #A9A9A9;
 		border-radius: 8px;
 		padding: 1em;
 	}
-	.res {
-		display: flex;
-		flex-direction: column;
-		margin: 0 2.5em;
-		font-family: "Georgia",serif;
-		font-style: italic;
-		font-size: 2vw;
-	 }
 
 	 #userDetails .show {
 	 	display: block;
@@ -157,26 +140,6 @@ td{
 	 	margin:0.1em; 
 	 }
 	
-	.res li {
-		margin: 0.5em;
-	}
-
-	.res2 a {
-		margin: 0.7em;
-	}
-	.horizon {
-    	display: inline-flex;
-    	flex-direction: row;
-    	margin-top: 0.1em;
-    }
-
-    .res2 {
-	display: flex;
-	flex-direction: column;
-	font-family: "Georgia",serif;
-	margin: 0.5em 0.05em;
-   }
-
    td {
    	font-size: 2vw;
    }
@@ -216,31 +179,12 @@ td{
 		margin:0 4.8em 4em 4.8em;
 	}
 
-	#printResult{
+	.printResult{
 		margin: 1em auto;
 		background-color: #A9A9A9;
 		border-radius: 8px;
 		padding: 1em;
 	}
-
-	.res {
-		display: flex;
-		flex-direction: column;
-		margin: 1em 2.5em;
-		font-family: "Georgia",serif;
-		font-style: italic;
-		font-size: 2.5vw;
-
-	}
-
-	.res li {
-		margin: 0.2em;
-	}
-
-	.res2 a {
-		margin: 0.5em;
-	}
-
 
 }
 
@@ -249,30 +193,13 @@ td{
 @media (min-width: 811px){
 
 
-	#printResult {
+	.printResult {
 
 		background-color: #A9A9A9;
 		border-radius: 8px;
 		padding: 1em;
-		margin:0 10em 4em 10em;
+		margin:0 auto;
 	}
-
-	.res2 a{
-		text-align: center;
-		margin: 0.8em;
-
-	}
-
-	.res {
-		display: flex;
-		flex-direction: column;
-		margin: 1em 2.5em;
-		font-family: "Georgia",serif;
-		font-style: italic;
-		font-size: 2vw;
-
-	}
-
 
 	#userDetails label {
 		margin-right: 1em; 

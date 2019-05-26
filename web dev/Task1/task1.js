@@ -2,13 +2,10 @@ var addMoreItems = document.querySelector("#addMoreFood");
 var removeFood = document.querySelector("#deleteFood");
 var submit = document.querySelector("#submit");
 var form = document.querySelector("#userDetails");
-var hide = document.querySelector(".hide");
 var hidden = document.querySelector(".hidden");
-var result = document.getElementById("printResult");
 var clear1 = document.querySelector("#clear1");
-var clear2 = document.querySelector("#clear2");
-var foodItemList = document.querySelector("#foodItemList");
 var btn = document.querySelector("#remove"); 
+
 
 //getting items from local storage if exists
 var itemsArray = localStorage.getItem("items") ? JSON.parse(localStorage.getItem("items")) : [];
@@ -24,7 +21,12 @@ foodList = JSON.parse(localStorage.getItem("foods"));
 //variables used for checking later on
 var cal = 0;
 var wat = 0;
+var food = 0;
+var req = 0;
 var once = 0;
+var once1 = 0;
+var once2 = 0;
+var once3 = 0;
 
 //Class to store basic user info
 class calorieCounter {
@@ -39,34 +41,6 @@ class calorieCounter {
 		this.water = water;
 		this.phyLevel = phyLevel;
 
-	}
-	getName(){
-		return this.username;
-	}
-	
-	getAge(){
-		return this.age;
-	}
-
-	getWeight(){
-		return this.weight;
-	}
-
-	getHeight(){
-		return this.heights;
-	}
-
-	getGender()
-	{
-		return this.gender;
-	}
-
-	getCalorieRequired(){
-		return this.calorieRequire;
-	}
-
-	getCalorieIntake(){
-		return this.calIntake;
 	}
     
     //calculates required calorie
@@ -89,42 +63,23 @@ class calorieCounter {
 		this.calIntake -= caloriePerFood;
 	}
 
-    //comparing req. and consumed calorie
-	cmpCal(){
-		var msg;
-		if(this.calorieRequire == this.calIntake){
-			cal = 2;
-			msg = "Whoa Whoa! You take in the right amount of calorie. Maintain the same level everyday to lead a healthy Life";
+	displayCalReq(){
+		if(!req){
+		var line = document.querySelector("#line1");
+		var text = document.querySelector("#calreqRes");
+		if(!once){
+          var line2 = document.createElement("HR");
+		  text.classList.add("printResult");
+		  text.parentNode.insertBefore(line2,text.nextSibling);
+		  once = 1;
 		}
-		else if(this.calorieRequire < this.calIntake){
-			cal = 1;
-			msg = "You have to reduce your calorie Intake by " + Math.round((this.calIntake - this.calorieRequire) * 100)/100 + " cal.";
+		text.innerHTML = "Your daily Calorie requirement is " + this.calorieRequire + " Calories";
+		req = 1;	
 		}
-		else {
-
-			msg = "You have to increase your calorie Intake by " + Math.round((this.calorieRequire - this.calIntake) * 100)/100 + " cal";
-		}
-
-		return msg;
+		
 	}
-    
-    //comapring qty of water consumed
-	cmpWater(){
-		var msg;
-		if(this.water >= 3.7 && this.gender == "Male" || this.water >= 2.7 && this.gender == "Female"){
-			msg = "Yayy! You consume the right amount of water.";
-		}
-		else
-		{
-			wat = 1;
-			msg = "Human body requires atleast 3.7 litres of water for males and 2.7 litres of water for females on a daily basis. you need to consume. ";
-			msg += "Not Drinking enough water can lead to dehydration which causes Dizziness,change in urine colour,kidney problems etc.";
-			msg += "Please maintain the minimum level of water consumption. " 
-		}
-		return msg;
-	}
-
 }
+
 
 //class to store foodlist
 class calorieIntake {
@@ -156,10 +111,13 @@ class calorieIntake {
 
 		this.caloriePerFood = this.carbs * CARB_CALORIE + this.proteins * PROTEIN_CALORIE + this.fats * FAT_CALORIE;
 	}
+
 }
 
 //used to set initial value to form inputs from local storage
 initialValue();
+
+var calReq = new calorieCounter("",0,0,0,0,"",0,0);
 
 //adding food items
 addMoreItems.addEventListener("click",function(){
@@ -168,7 +126,7 @@ addMoreItems.addEventListener("click",function(){
 	var carbs = document.getElementById('carbs');
 	var fats = document.querySelector("#fats");
 	var proteins = document.querySelector("#proteins");
-
+    
 	if(!(food.value == "" || carbs.value == ""
 		|| fats.value == "" || proteins.value == "")){
 
@@ -177,8 +135,18 @@ addMoreItems.addEventListener("click",function(){
       	var foodDetails = new calorieIntake(food.value,parseFloat(carbs.value),parseFloat(fats.value),parseFloat(proteins.value));
 	    foodDetails.calCaloriePerFood();
 	    foodList.push(foodDetails);
+          cal = 0;
+         if(itemsArray.length >= 1){
+         	calReq = itemsArray[itemsArray.length - 1];
+            calReq.calIntake += foodDetails.caloriePerFood;
+	        itemsArray.push(calReq);
+	        var msg = cmpCal();
+            displayCal(msg);
+         }
 
+        displayFood(foodList.length - 1);
 	    localStorage.setItem("foods",JSON.stringify(foodList));
+	    localStorage.setItem("items",JSON.stringify(itemsArray));
 	    foodReset();
 
       }
@@ -221,14 +189,20 @@ btn.addEventListener("click",function(){
 		for (i = 0;i < foodList.length; i++){
 			if(foodList[i].food.toUpperCase() == foodName.value.toUpperCase()){
 				itemsArray[itemsArray.length-1].calIntake -= foodList[i].caloriePerFood;
+				var table = document.querySelector("table");
+				table.deleteRow(i + 1);
 				foodList.splice(i,1);
+                if(foodList.length == 0){
+                	table.deleteRow(0);
+                }
 				flag = 1;
 				foodName.value = "";
 				removeFoodDiv.classList.add("hidden");
 			}
 		}
 		if(flag){
-			alert("Removed Successfully");
+			var msg = cmpCal();
+			displayCal(msg);
 			localStorage.setItem("foods",JSON.stringify(foodList));
 			localStorage.setItem("items",JSON.stringify(itemsArray));
 		}
@@ -245,7 +219,7 @@ btn.addEventListener("click",function(){
 
 
 
-//submit form to calculate and compare calories
+//calculate calorie requirement
 submit.addEventListener("click",function(){
 
 	var name = document.querySelector("#name");
@@ -254,139 +228,175 @@ submit.addEventListener("click",function(){
 	var height = document.querySelector("#height");
 	var weight = document.querySelector("#weight");
 	var phyLevel = document.querySelector("#physicalLevel");
-	var water = document.querySelector("#water");
-
-	var food = document.querySelector("#food");
-	var carbs = document.getElementById('carbs');
-	var fats = document.querySelector("#fats");
-	var proteins = document.querySelector("#proteins");
-
-
+	
 	if(!(name.value == "" || parseInt(age.value) <= 0 || parseFloat(height.value) <= 0 
-		|| parseFloat(weight.value) <= 0 || parseFloat(water.value) <= 0 
-		|| gender == "" || parseFloat(phyLevel.value) <= 0 )){
-
-		if(!(food.value == "" || carbs.value == 0 || proteins.value == 0 || fats.value == 0)){
-
-			var foodDetails = new calorieIntake(food.value,parseFloat(carbs.value),parseFloat(fats.value),parseFloat(proteins.value));
-			foodDetails.calCaloriePerFood();
-			foodList.push(foodDetails);
-		}
-		if(!(foodList.length < 1)){
-			var alt = new calorieIntake();			
-			var dailyIntake = alt.calcCalorieIntake();
-
-
-			var calReq = new calorieCounter(name.value,parseInt(age.value),parseFloat(height.value),parseFloat(weight.value),parseFloat(phyLevel.value),gender,dailyIntake,parseFloat(water.value));
-
+		|| parseFloat(weight.value) <= 0 || gender == "" || parseFloat(phyLevel.value) <= 0 )){
+             req = 0;
+			var calReqTemp = new calorieCounter(name.value,parseInt(age.value),parseFloat(height.value),parseFloat(weight.value),parseFloat(phyLevel.value),gender,0,0);
+			calReq = calReqTemp;
 			calReq.calcCalorieRequired();
-
-			display(calReq);
-
-
-			hide.classList.add("hidden");
-			result.classList.remove("hidden");
-
-			if(cal == 1 && wat == 1){
-
-				alert("Uh-Oh! You consume more than required amount of calories and water on a daily basis");	
-			}
-			else if(cal == 0 && wat == 1){
-				alert("Uh-Oh! You need to consume more calories and water in a day");
-			}
-			else if(cal == 1){
-				alert("Uh-Oh! You consume more than required amount of calories in a day.");
-			}
-			else if(wat == 1){
-
-				alert("Uh-Oh! You did not consume enough water today");	
-			}
-			else if(cal == 0){
-				alert("Uh-Oh! You consume less calories than what is required");
-			}
+            calReq.displayCalReq();
             
             //pushing into local storage
 			itemsArray.push(calReq);
 			localStorage.setItem('items', JSON.stringify(itemsArray));
 
 		}
-		else{
-			alert("Please add food Items");
-		}
-	}
 
 	else{
 		alert("Please Enter Valid Values!");
 	}
 });
 
-
-
+//water tracker
+submitW.addEventListener("click",function(){
+	var water = document.querySelector("#water");
+	if(!(itemsArray.length == 0 || itemsArray[itemsArray.length - 1].gender == "" )){
+		if(!(water.value <= 0)){
+			calReq = itemsArray[itemsArray.length - 1];
+           calReq.water += parseFloat(water.value);
+	var msg = cmpWater();
+    itemsArray.push(calReq);
+	localStorage.setItem('items', JSON.stringify(itemsArray));
+	displayWaterReq(msg);
+		}
+		else{
+			alert("Please enter a positive number");
+		}
+		
+	}
+	else{
+		alert("Please Enter basic details first");
+	}
+	
+})
 
 //clear input field
 clear1.addEventListener("click",function(){	
-	reset();
+	localStorage.clear();
+
+	userDetailReset();
+	foodReset();
+	var table = document.querySelector("table");
+	if(foodList.length > 0){
+	for(var i = foodList.length;i >= 0;i--){
+		table.deleteRow(i);
+	}
+	}
+	
+	document.querySelector("#calRes").innerHTML = "";
+	document.querySelector("#calRes").classList.remove(".printResult");
+	document.querySelector("#waterRes").innerHTML = "";
+	document.querySelector("#waterRes").classList.remove(".printResult");
+	document.querySelector("#calreqRes").innerHTML = "";
+	document.querySelector("#calreqRes").classList.remove(".printResult");
+	foodList = [];
+	itemsArray = [];
+	food = 0;
+	
 });
 
-//display food list
-foodItemList.addEventListener("click",function(){
+function cmpCal(){
+		var msg;
+		if(calReq.calorieRequire == calReq.calIntake){
+			alert("Yayy! You take in the right amount of calories");
+			msg = "Whoa Whoa! You take in the right amount of calorie. Maintain the same level everyday to lead a healthy Life";
+		}
+		else if(calReq.calorieRequire < calReq.calIntake){
+			alert("Oof You have to reduce calorie intake");
+			msg = "You have to reduce your calorie Intake by " + Math.round((calReq.calIntake - calReq.calorieRequire) * 100)/100 + " cal.";
+		}
+		else {
+            alert("Oof you have to increase calorie intake");
+			msg = "You have to increase your calorie Intake by " + Math.round((calReq.calorieRequire - calReq.calIntake) * 100)/100 + " cal";
+		}
 
-	if(!once){
-		once = 1;
-		var para = document.querySelector("#foodItem");
-		var table = document.createElement("TABLE");
-		para.appendChild(table);
+		return msg;
+	}
 
-		var row = table.insertRow(0);
+function displayWaterReq(msg){
+	    if(!wat){
+		var text = document.querySelector("#waterRes");
+		text.classList.add("printResult");
+		var element = document.querySelector("#line2");
+		if(!once2){
+		var line2 = document.createElement("HR");	
+		text.parentNode.insertBefore(line2,text.nextSibling);	
+		once2 = 1;
+		}
+		wat = 1;
+	    text.innerHTML = msg;
+	   }
+}
 
-		var head1 = row.insertCell(0);
-		var head2 = row.insertCell(1);
-		var head3 = row.insertCell(2);
-		var head4 = row.insertCell(3);
-		var head5 = row.insertCell(4);
-		head1.innerHTML = "Food Item";
-		head2.innerHTML = "Carbs";
-		head3.innerHTML = "Fats";
-		head4.innerHTML = "Proteins";
-		head5.innerHTML = "Calories";
+
+function cmpWater(){
+		var msg;
+		wat = 0;
+		if(calReq.water >= 3.7 && calReq.gender == "Male" || calReq.water >= 2.7 && calReq.gender == "Female"){
+			msg = "Yayy! You consume the right amount of water.";
+			alert("Good Job! You consume the right amount");
+		}
+		else
+		{
+			msg = "Human body requires atleast 3.7 litres of water for males and 2.7 litres of water for females on a daily basis.";
+			msg += "Not Drinking enough water can lead to dehydration which causes Dizziness,change in urine colour,kidney problems etc.";
+			msg += "Please maintain the minimum level of water consumption."; 
+			alert("Uh-Oh! Please increase your water intake.");
+		}
+		return msg;
+	}
+function displayCal(msg){
+	    if(!cal){
+	    var element = document.querySelector("#line3");
+	    var text = document.querySelector("#calRes");
+	    text.classList.add("printResult");
+	    if(!once3){
+	    var line2 = document.createElement("HR");	
+		text.parentNode.insertBefore(line2,text.nextSibling);	
+		once3 = 1;
+	    }
+		text.innerHTML = msg;
+	    }
+	    
+}
 
 
-		for(var i = 0;i<foodList.length;i++){
-			row = table.insertRow(i + 1);
+function displayFood(index){
+
+		    var table = document.querySelector("table");
+		    table.classList.add("printResult");
+		    if(!food){
+		    	 var row = table.insertRow(0);
+
+		         var head1 = row.insertCell(0);
+		         var head2 = row.insertCell(1);
+		         var head3 = row.insertCell(2);
+		         var head4 = row.insertCell(3);
+		         var head5 = row.insertCell(4);
+		         head1.innerHTML = "Food Item";
+		         head2.innerHTML = "Carbs";
+		         head3.innerHTML = "Fats";
+		         head4.innerHTML = "Proteins";
+		         head5.innerHTML = "Calories";
+		         food = 1;
+		    }
+
+		    var row = table.insertRow(index  + 1);
 			var cell1 = row.insertCell(0);
 			var cell2 = row.insertCell(1);
 			var cell3 = row.insertCell(2);
 			var cell4 = row.insertCell(3);
 			var cell5 = row.insertCell(4);
 
-			cell1.innerHTML = foodList[i].food;
-			cell2.innerHTML = foodList[i].carbs.toString();
-			cell3.innerHTML = foodList[i].fats.toString();
-			cell4.innerHTML = foodList[i].proteins.toString();
-			cell5.innerHTML = foodList[i].caloriePerFood.toString();
-		}
+			cell1.innerHTML = foodList[index].food;
+			cell2.innerHTML = foodList[index].carbs.toString();
+			cell3.innerHTML = foodList[index].fats.toString();
+			cell4.innerHTML = foodList[index].proteins.toString();
+			cell5.innerHTML = foodList[index].caloriePerFood.toString();
+
 	}
-});
 
-//reset values
-clear2.addEventListener("click",function(){
-	reset();
-});
-
-
-function reset(){
-	localStorage.clear();
-
-	userDetailReset();
-	foodReset();
-	foodList = [];
-	itemsArray = [];
-	var foodItem = document.querySelector("#foodItem");
-	foodItem.removeChild(foodItem.lastChild);
-	
-	form.classList.remove("hidden");
-	result.classList.add("hidden");
-}
 
 //used to get gender of user
 function genderFind(){
@@ -465,28 +475,12 @@ function initialValue(){
 		}
 
 		phyLevel.value = data[len].phyLevel;
-
+        for(var i = 0; i < foodList.length;i++){
+               displayFood(i);	
+        }
+        
 	}
 
 }
 
-
-function display(calReq){
-
-	var printName = document.querySelector("#printName");
-	var printAge = document.querySelector("#printAge");
-	var printGender = document.querySelector("#printGender");
-	var printCalReq = document.querySelector("#printCalReq");
-	var printCalIn = document.querySelector("#printCalIn");
-	var printCalInfer = document.querySelector("#printCalInfer");
-	var printWaterInfer = document.querySelector("#printWaterInfer");
-
-	printName.innerHTML = "Name: " + calReq.getName();
-	printAge.innerHTML = "Age: " + calReq.getAge();
-	printGender.innerHTML = "Gender: " + calReq.getGender();
-	printCalReq.innerHTML = "Daily Calorie Required: " + calReq.getCalorieRequired() + " Cal";
-	printCalIn.innerHTML = "Daily Calorie Intake: " + calReq.getCalorieIntake() + " Cal";
-	printCalInfer.innerHTML = calReq.cmpCal();
-	printWaterInfer.innerHTML = calReq.cmpWater();
-}
 
