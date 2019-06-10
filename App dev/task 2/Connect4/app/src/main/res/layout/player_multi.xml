@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:orientation="vertical">
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
+        
+        <TextView
+            android:id="@+id/player1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="#403a3e"
+            android:textAlignment="center"
+            android:background="@drawable/player_bg"
+            android:layout_weight="1"
+            android:text="Player 1"/>
+
+        <TextView
+            android:id="@+id/player2"
+            android:layout_width="0dp"
+            android:textColor="#403a3e"
+            android:layout_height="wrap_content"
+            android:background="@drawable/player_bg"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:padding="5dp"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
+            android:text="Player 2"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/undo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:padding="5dp"
+        android:textSize="18sp"
+        android:textColor="@color/white"
+        android:background="@drawable/button"
+        android:text="UNDO"/>
+
+    <view class="com.example.pavithra.connect4.GamePlay"
+        android:id="@+id/board"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="20dp"
+        />
+</LinearLayout>
